@@ -1,0 +1,18 @@
+.navbar{
+  width:80% !important;
+  margin:5px auto;
+  left:0;
+  right:0;
+  padding: 0px 5px;
+}
+.navbar-nav > li{
+  padding-left:30px;
+  padding-right:30px;
+}
+.date {
+  text-align: center;
+}
+.nav-item{
+  font-size:1.25rem
+}
+

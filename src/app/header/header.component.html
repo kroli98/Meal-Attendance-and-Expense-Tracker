@@ -1,0 +1,36 @@
+<div class="row" style="display: flex; justify-content: center; margin-top:10px">
+  <div class="col-md-12">
+  <div class="date" >
+    {{date | date:'y MMM d'}}
+  </div>
+  </div>
+  </div>
+<div class="row" style="display: flex; justify-content: center;margin-bottom:30px">
+  <div class="col-md-12">
+    <div class="date">
+      {{date | date:'EEEE'}}
+    </div>
+  </div>
+</div>
+
+<div class="row" style="display: flex; justify-content: center ">
+
+<div class="col-md-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary"  style="border-radius: 25px">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="main_nav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item" routerLinkActive="active"> <a class="nav-link" routerLink="/kezdolap">Kezdőlap </a> </li>
+        <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="/nevsor"> Névsor </a></li>
+        <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="/konyveles"> Könyvelés </a></li>
+      </ul>
+
+    </div>
+  </nav>
+</div>
+
+</div>
+

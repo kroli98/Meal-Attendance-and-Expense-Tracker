@@ -1,0 +1,46 @@
+<div class="row">
+  <form (ngSubmit)="onSubmit(f)"  #f="ngForm">
+  <div class="col-xs-12">
+    <ul class="lis-group">
+        <div class="list-group-item" *ngFor="let person of filter(people)|orderBy:'name'; let i= index">
+
+          <div  data-toggle="collapse" [attr.data-target]="'#' + 'prefix' +i" >
+          {{person.id}}  {{person.name}} ({{person.birthDate| date:"yyyy-MM-dd"}})
+          </div>
+          <label style="margin-right:20px" >Jelen: </label>
+          <input  type="checkbox" id='checkbox{{person.id}}' (click)="refreshCheckedList()"  name="checkbox{{person.id}}"
+                 [checked]="true">
+
+          <div class="collapse" [attr.id]=" 'prefix' + i">
+            <hr>
+            <div class="grid-container">
+              <div class="grid-item">
+                Kedvezmény: {{person.discount}}
+              </div>
+              <div class="grid-item">
+                Igazolás: {{person.doctype}}
+              </div>
+              <div class="grid-item">
+                Érvényesség: {{person.docstartDate | date:"yyyy-MM-dd"}}-{{person.docendDate | date:"yyyy-MM-dd"}}
+              </div>
+              <div class="grid-item">
+                Csoport: {{person.group}}
+
+              </div>
+
+
+
+            </div>
+
+
+          </div>
+
+          </div>
+
+    </ul>
+
+  </div>
+    <button type="submit" class="btn btn-success">Mentés</button>
+    <button  type="button" (click)="onClear()" style="margin:20px" class="btn btn-danger" >Törlés</button>
+  </form>
+</div>

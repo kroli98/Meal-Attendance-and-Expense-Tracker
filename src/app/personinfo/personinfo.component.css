@@ -1,0 +1,9 @@
+.list-group-item{
+  width: 60% !important;
+  background-color: cornflowerblue;
+  margin:5px auto;
+  left:0px;
+  right:0;
+  padding: 5px 5px 5px 10px;
+  border-radius: 25px
+}

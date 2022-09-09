@@ -1,0 +1,35 @@
+
+
+
+<mat-form-field appearance="fill">
+
+  <mat-label>Adj meg egy intervallumot</mat-label>
+  <mat-date-range-input  [rangePicker]="picker">
+    <input (dateInput)="selectStartDate($event)"  matStartDate placeholder="Start date">
+    <input (dateInput)="selectEndDate($event)" matEndDate placeholder="End date">
+  </mat-date-range-input>
+  <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+</mat-form-field>
+
+
+<div *ngIf="finished">
+  <mat-list>
+    <mat-label>Jelenlét:</mat-label>
+  <mat-list-item *ngFor="let date of personDates">
+    {{date |date: 'yyyy-MM-dd'}}
+  </mat-list-item>
+    <mat-list-item> <button mat-raised-button (click)="calculate()">
+      Díj számítás
+    </button></mat-list-item>
+   <mat-list-item *ngIf="mothlycalprice " >
+     <mat-label>Havi fizetendő: {{mothlycalprice}} Ft</mat-label>
+   </mat-list-item>
+
+
+</mat-list>
+
+
+</div>
+
