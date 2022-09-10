@@ -36,9 +36,7 @@ export class AccountingpersonComponent implements OnInit {
 
     });
   }
-  padTo2Digits(num: number) {
-    return num.toString().padStart(2, '0');
-  }
+
 
 
 
@@ -71,6 +69,9 @@ console.log(dateListInfo);
 
 
   }
+  padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
+  }
   formatDate(date: Date) {
     date= new Date(date);
     return [
@@ -93,7 +94,7 @@ console.log(dateListInfo);
     // @ts-ignore
     if(person.discount==="50%")
     {
-discount=0.5;
+      discount=0.5;
     }
     // @ts-ignore
     if(person.discount==="100%")

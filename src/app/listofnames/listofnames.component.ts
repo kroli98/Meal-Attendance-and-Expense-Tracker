@@ -29,6 +29,7 @@ export class ListofnamesComponent implements OnInit {
   togglev= false;
   filtered:boolean= false;
   groupsel: any |undefined;
+  newColor: boolean = false;
 
   constructor(private piService: PersoninfoService, private datePipe: DatePipe, private lofnamesService: ListofnamesService) {
   }
@@ -40,7 +41,7 @@ export class ListofnamesComponent implements OnInit {
 
 
     // @ts-ignore
-
+    this.lofnamesService.initialize();
 
     this.datestring = this.datePipe.transform(this.date, 'yyyy-MM-dd');
     this.lofnamesService.setDate(this.date);
@@ -147,7 +148,7 @@ export class ListofnamesComponent implements OnInit {
 
 
     // @ts-ignore
-    newPerson = new Person(this.id, value.name, value.birthdateinput, discount, documenttype, startdate, enddate,group,school_group);
+    newPerson = new Person(this.id,new Date(this.date), value.name, value.birthdateinput, discount, documenttype, startdate, enddate,group,school_group);
     console.log("nev"+newPerson);
 
 
@@ -193,12 +194,14 @@ export class ListofnamesComponent implements OnInit {
 
   }
 
-  filterOvoda() {
+  filterOvoda($event:Event) {
     this.toggleo = !this.toggleo;
     this.togglei = false;
     this.togglev = false;
     this.filtered=!this.filtered;
     this.lofnamesService.setFiltered('Óvoda',this.filtered);
+   this.newColor=!this.newColor;
+
    if(!this.filtered)
    {
      this.lofnamesService.trigger();
@@ -215,6 +218,7 @@ export class ListofnamesComponent implements OnInit {
     this.filtered=!this.filtered;
 
     this.lofnamesService.setFiltered('Iskola',this.filtered);
+    this.newColor=!this.newColor;
     if(!this.filtered)
     {
       this.lofnamesService.trigger();
@@ -228,7 +232,7 @@ export class ListofnamesComponent implements OnInit {
     this.toggleo = false;
     this.togglei = false;
     this.filtered=!this.filtered;
-
+    this.newColor=!this.newColor;
     this.lofnamesService.setFiltered('Vendég',this.filtered);
     if(!this.filtered)
     {

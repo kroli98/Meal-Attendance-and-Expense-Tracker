@@ -29,6 +29,8 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatListModule} from "@angular/material/list";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatButtonModule} from "@angular/material/button";
+import {NgxPrintModule} from "ngx-print";
+import {MatIconModule} from "@angular/material/icon";
 
 
 
@@ -65,7 +67,9 @@ import {MatButtonModule} from "@angular/material/button";
     MatNativeDateModule,
     MatListModule,
     MatButtonToggleModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxPrintModule,
+    MatIconModule
 
 
   ],

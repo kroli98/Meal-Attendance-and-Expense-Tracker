@@ -6,6 +6,7 @@ import {NgForm} from "@angular/forms";
 import {ListofnamesService} from "../listofnames/listofnames.service";
 import {Listinfo} from "../shared/listinfo.model";
 import {LocalService} from "../local.storage.service";
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Component({
@@ -23,23 +24,22 @@ export class PersoninfoComponent implements OnInit {
 
   private pChangeSub: Subscription | undefined;
   private dateChangeSub: Subscription | undefined;
-  private filteredChangeSub: Subscription |undefined;
+  private filteredChangeSub: Subscription | undefined;
 
   constructor(private piService: PersoninfoService, private lofnamesService: ListofnamesService,
-              private localStorage: LocalService) {
+              private localStorage: LocalService, public dialog: MatDialog) {
   }
 
 
   ngOnInit(): void {
 
 
-    this.filteredChangeSub=this.dateChangeSub;
+    this.filteredChangeSub = this.dateChangeSub;
     this.loadCheckedPeople();
     // @ts-ignore
-    this.dateChangeSub = this.lofnamesService.dateChangeSub.subscribe(  (date: Date) => {
+    this.dateChangeSub = this.lofnamesService.dateChangeSub.subscribe((date: Date) => {
       this.date = date;
       this.loadCheckedPeople();
-
 
 
     });
@@ -51,15 +51,11 @@ export class PersoninfoComponent implements OnInit {
     });
 
 
-
-
   }
-  loadCheckedPeople(){
+
+  loadCheckedPeople() {
 
     setTimeout(() => {
-
-
-      this.lofnamesService.initialize();
 
       // @ts-ignore
       if ((this.lofnamesService.getListInfoDateList()) !== undefined) {
@@ -92,20 +88,23 @@ export class PersoninfoComponent implements OnInit {
 
 
               let element = (document.getElementById("checkbox" + id)) as HTMLInputElement;
-              console.log(element.checked)
-              // @ts-ignore
-              console.log("false name:" + this.people[i].name);
+              if (element) {
 
-              element.checked = false;
-              // @ts-ignore
+                element.checked = false;
+                // @ts-ignore
+              }
+
 
             } else {
               // @ts-ignore
 
               document.addEventListener("DOMContentLoaded", function () {
                 let element = (document.getElementById("checkbox" + id)) as HTMLInputElement;
-                element.checked = false;
-                console.log("false id:" + id);
+                if (element) {
+
+                  element.checked = false;
+                  // @ts-ignore
+                }
 
               });
             }
@@ -122,13 +121,19 @@ export class PersoninfoComponent implements OnInit {
           let id = this.people[i].id;
           if (document.readyState === 'complete') {
             let element = (document.getElementById("checkbox" + id)) as HTMLInputElement;
-            element.checked = true;
-            console.log("true");
+            if (element) {
+
+              element.checked = true;
+              // @ts-ignore
+            }
           } else {
             document.addEventListener("DOMContentLoaded", function () {
               let element = (document.getElementById("checkbox" + id)) as HTMLInputElement;
-              element.checked = true;
-              console.log("true");
+              if (element) {
+
+                element.checked = true;
+                // @ts-ignore
+              }
 
             });
           }
@@ -138,7 +143,7 @@ export class PersoninfoComponent implements OnInit {
       }
 
       console.log("hi3")
-    },10);
+    }, 1);
   }
 
   ngOnDestroy(): void {
@@ -149,7 +154,7 @@ export class PersoninfoComponent implements OnInit {
 
   onSubmit(pfrom: NgForm) {
     this.refreshCheckedList();
-    this.lofnamesService.addDay( this.checkedpeople.slice());
+    this.lofnamesService.addDay(this.checkedpeople.slice());
 
   }
 
@@ -163,9 +168,8 @@ export class PersoninfoComponent implements OnInit {
   refreshCheckedList() {
 
 
-
     let checked = new Array<number>();
-    let unchecked= new Array<number>();
+    let unchecked = new Array<number>();
     // @ts-ignore
     for (let i = 0; i < this.people?.length; i++) {
       // @ts-ignore
@@ -177,11 +181,10 @@ export class PersoninfoComponent implements OnInit {
 
         if (element.checked) {
           checked.push(id);
-          console.log("checked:"+id)
-        }
-        else{
+          console.log("checked:" + id)
+        } else {
           unchecked.push(id);
-          console.log("unchecked:"+id)
+          console.log("unchecked:" + id)
         }
       } else {
         document.addEventListener("DOMContentLoaded", function () {
@@ -189,11 +192,10 @@ export class PersoninfoComponent implements OnInit {
 
           if (element.checked) {
             checked.push(id);
-            console.log("checked:"+id)
-          }
-          else{
+            console.log("checked:" + id)
+          } else {
             unchecked.push(id);
-            console.log("unchecked:"+id)
+            console.log("unchecked:" + id)
           }
 
         });
@@ -201,59 +203,71 @@ export class PersoninfoComponent implements OnInit {
       }
 
     }
-    if(this.lofnamesService.getFiltered())
-    {
-      for(let i=0;i<checked.length;i++)
-      {
+    if (this.lofnamesService.getFiltered()) {
+      for (let i = 0; i < checked.length; i++) {
         (!this.checkedpeople.includes(checked[i]))
         {
           this.checkedpeople.push(checked[i]);
-          console.log("checked :" +checked[i]);
+          console.log("checked :" + checked[i]);
         }
       }
 
-    }
-    else{
+    } else {
       this.checkedpeople = checked;
-      this.uncheckedpeople=unchecked;
+      this.uncheckedpeople = unchecked;
     }
 
-    console.log('checkedpeople: '+this.checkedpeople);
-    console.log('checked: '+checked);
+    console.log('checkedpeople: ' + this.checkedpeople);
+    console.log('checked: ' + checked);
 
 
   }
 
-   filter (itemList: Person[] |undefined): Person[] |undefined  {
+  filter(itemList: Person[] | undefined): Person[] | undefined {
 
-    if(this.lofnamesService.getFiltered())
-    {
-      if(this.lofnamesService.getGroup()==='Óvoda')
-      {
+    if (this.lofnamesService.getFiltered()) {
+      if (this.lofnamesService.getGroup() === 'Óvoda') {
         // @ts-ignore
-        return this.people?.filter(e => e.group==="Óvoda");
+        return this.people?.filter(e => e.group === "Óvoda");
       }
-      if(this.lofnamesService.getGroup()==='Iskola')
-      {
+      if (this.lofnamesService.getGroup() === 'Iskola') {
         // @ts-ignore
-        return this.people?.filter(e => e.group==="Iskola");
+        return this.people?.filter(e => e.group === "Iskola");
       }
-      if(this.lofnamesService.getGroup()==='Vendég')
-      {
+      if (this.lofnamesService.getGroup() === 'Vendég') {
         // @ts-ignore
-        return this.people?.filter(e => e.group==="Vendég");
+        return this.people?.filter(e => e.group === "Vendég");
       }
     }
 
     //your filter logic here
 
     // @ts-ignore
-    return this.people ;
+    return this.people.filter(e => this.formatDate(e.createddate) <= this.formatDate(this.date));
+  }
+
+  padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
+  }
+
+  formatDate(date: Date) {
+    date = new Date(date);
+    return [
+      date.getFullYear(),
+      this.padTo2Digits(date.getMonth() + 1),
+      this.padTo2Digits(date.getDate()),
+    ].join('-');
   }
 
 
+  deletePerson(id: number) {
+
+  }
+
+  openDialog() {
 
 
+  }
 }
 
 

@@ -46,13 +46,20 @@ export class ListofnamesService {
 
   }
   initialize(){
-    if ('listinfo' in localStorage) {
 
-      const listinfo_2 = this.localService.getData('listinfo');
-      this.listinfo = JSON.parse(listinfo_2);
+      if ('listinfo' in localStorage) {
+
+        const listinfo_2 = this.localService.getData('listinfo');
+        this.listinfo = JSON.parse(listinfo_2);
 
 
-    }
+      }
+
+
+    setTimeout(() => {
+      this.trigger();
+    },500);
+
 
   }
 
@@ -71,7 +78,6 @@ export class ListofnamesService {
 
   }
   getListInfoDateList(){
-
 
 
     try {

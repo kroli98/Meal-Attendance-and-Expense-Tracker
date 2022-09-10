@@ -4,9 +4,9 @@
 
     <div class="col-md-12" style="display: flex; justify-content: center">
 
-      <button type="button" style="margin:10px" (click)="filterOvoda()"  [ngClass]="{'btn btn-outline-primary': !toggleo, 'btn btn-primary':toggleo}"   >Óvoda </button>
-      <button type="button" style="margin:10px"  (click)="filterIskola()" [ngClass]="{'btn btn-outline-primary': !togglei, 'btn btn-primary':togglei}"  >Iskola </button>
-      <button type="button" style="margin:10px"   (click)="filterVendeg()" [ngClass]="{'btn btn-outline-primary': !togglev, 'btn btn-primary':togglev}"  >Vendég</button>
+      <button mat-raised-button [ngClass]="{'test':toggleo}" type="button" id="ovodab" style="margin:10px" (click)="filterOvoda($event)"  >Óvoda </button>
+      <button mat-raised-button [ngClass]="{'test':togglei} " type="button"  id="iskolab" style="margin:10px"  (click)="filterIskola()" >Iskola </button>
+      <button mat-raised-button  [ngClass]="{'test':togglev}" type="button" id="vendegb" style="margin:10px"   (click)="filterVendeg()" >Vendég</button>
 
     </div>
   <div class="col-md-12" style="display: flex; justify-content: center">

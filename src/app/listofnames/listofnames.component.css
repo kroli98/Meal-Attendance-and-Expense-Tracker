@@ -49,11 +49,12 @@ input[type="checkbox"]{
   height: 20px;
   width: 20px;
 }
-.btn.btn-outline-primary{
-  margin-right: 10px;
-  margin-left: 10px;
-}
+
 .fillb{
   background-color:blue;
+}
+.test {
+  background-color:royalblue;
+  color:white;
 }
 
