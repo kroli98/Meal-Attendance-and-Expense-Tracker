@@ -1,5 +1,7 @@
 .list-group-item{
-  width: 25% !important;
+  width: auto !important;
+  max-width:50rem !important;
+
   background-color: cornflowerblue;
   margin:5px auto;
   left:0px;
@@ -10,6 +12,9 @@
 .grid-container.person{
   display: grid;
   align-items: center;
+  color: white;
+  text-shadow: cornflowerblue;
+  font-size: 1.5rem;
 
 }
 .grid-item.name{
@@ -25,7 +30,7 @@ grid-row-start: 1;
   grid-row-end: 3;
   grid-column-start: 1;
   grid-column-end: 1;
-  text-align: center;
+  text-align: left;
 
 }
 .grid-item.deleteb{

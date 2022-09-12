@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { ListofnamesService } from '../listofnames/listofnames.service';
 import {PersoninfoService} from "../personinfo/personinfo.service";
-import {FormControl} from "@angular/forms";
+import {FormControl, FormGroup, NgForm} from "@angular/forms";
 import { Person } from '../shared/person.model';
 import { map, startWith } from 'rxjs/operators';
 import {Observable, Subscription} from "rxjs";
@@ -26,12 +26,15 @@ export class AccountingComponent implements OnInit {
   priceSub: Subscription |undefined;
   selected=false;
   price: number| undefined;
+  // @ts-ignore
+  @ViewChild('f') pform: FormGroup;
 
 
   constructor(public piService: PersoninfoService, private lofnamesService: ListofnamesService
   ,private accountingService:AccountingService) { }
 
   ngOnInit(): void {
+
     this.lofnamesService.initialize();
     this.price=this.accountingService.getPrice();
     this.filteredPeople = this.myControl.valueChanges.pipe(
@@ -87,6 +90,7 @@ export class AccountingComponent implements OnInit {
 
     console.log("id"+$event.option.value.id);
     this.accountingService.setSelectedPersonid($event.option.value.id);
+
   }
   public displayProperty(value:any) {
     if (value) {

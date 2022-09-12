@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'konyha';
+
+  constructor() {document.body.style.backgroundColor = "#FFFAF0"
+  }
+
 }

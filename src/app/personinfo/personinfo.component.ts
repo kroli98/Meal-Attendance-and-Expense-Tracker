@@ -6,7 +6,7 @@ import {NgForm} from "@angular/forms";
 import {ListofnamesService} from "../listofnames/listofnames.service";
 import {Listinfo} from "../shared/listinfo.model";
 import {LocalService} from "../local.storage.service";
-import {MatDialog} from "@angular/material/dialog";
+
 
 
 @Component({
@@ -16,7 +16,7 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class PersoninfoComponent implements OnInit {
   @ViewChild('f') form: NgForm | undefined;
-  people: Person[] | undefined;
+  people: Person[] |undefined;
   date: Date = new Date();
   checkedpeople: Array<number> = [];
   uncheckedpeople: Array<number> = [];
@@ -27,13 +27,14 @@ export class PersoninfoComponent implements OnInit {
   private filteredChangeSub: Subscription | undefined;
 
   constructor(private piService: PersoninfoService, private lofnamesService: ListofnamesService,
-              private localStorage: LocalService, public dialog: MatDialog) {
+              private localStorage: LocalService) {
   }
 
 
   ngOnInit(): void {
 
 
+    this.lofnamesService.initialize();
     this.filteredChangeSub = this.dateChangeSub;
     this.loadCheckedPeople();
     // @ts-ignore
@@ -240,10 +241,11 @@ export class PersoninfoComponent implements OnInit {
       }
     }
 
-    //your filter logic here
+      return this.people?.slice().filter(e=>{
+        return e !==null;
+      });
 
-    // @ts-ignore
-    return this.people.filter(e => this.formatDate(e.createddate) <= this.formatDate(this.date));
+
   }
 
   padTo2Digits(num: number) {
@@ -261,7 +263,7 @@ export class PersoninfoComponent implements OnInit {
 
 
   deletePerson(id: number) {
-
+    this.piService.deletePerson(id);
   }
 
   openDialog() {

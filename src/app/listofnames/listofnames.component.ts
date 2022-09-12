@@ -41,7 +41,7 @@ export class ListofnamesComponent implements OnInit {
 
 
     // @ts-ignore
-    this.lofnamesService.initialize();
+
 
     this.datestring = this.datePipe.transform(this.date, 'yyyy-MM-dd');
     this.lofnamesService.setDate(this.date);

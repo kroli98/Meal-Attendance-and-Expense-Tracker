@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PersoninfoService} from "../personinfo/personinfo.service";
 import {ListofnamesService} from "../listofnames/listofnames.service";
 import {AccountingService} from "../accounting/accounting.service";
@@ -6,6 +6,7 @@ import { formatDate } from '@angular/common';
 import {Listinfo} from "../shared/listinfo.model";
 import {Subject, Subscription} from "rxjs";
 import { Person } from '../shared/person.model';
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-accountingperson',
@@ -22,16 +23,20 @@ export class AccountingpersonComponent implements OnInit {
   price: number |undefined;
   priceSub: Subscription |undefined;
   mothlycalprice: number |undefined;
+  @ViewChild('f') form: any;
+
 
 
   constructor(public piService: PersoninfoService, private lofnamesService: ListofnamesService, private accountingService: AccountingService) {
   }
 
   ngOnInit(): void {
+
   this.price=this.accountingService.getPrice();
     this.personid = this.accountingService.getSelectedPersonid();
     this.priceSub = this.accountingService.priceSub.subscribe((price: number) => {
       this.price = price;
+      this.form.reset();
 
 
     });
@@ -52,6 +57,7 @@ export class AccountingpersonComponent implements OnInit {
   }
   getDateListInfo()
   {
+    this.personDates=new Array<Date>();
     this.finished=false;
     this.lofnamesService.initialize();
     // @ts-ignore

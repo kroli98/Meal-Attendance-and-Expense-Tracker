@@ -13,6 +13,8 @@
   text-align: center;
 }
 .nav-item{
-  font-size:1.25rem
+
+  margin:10px;
+  font-size: 1.5rem;
 }
 

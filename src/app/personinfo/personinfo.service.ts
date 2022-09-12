@@ -3,6 +3,7 @@ import {Subject} from "rxjs";
 import {Injectable} from "@angular/core";
 import {LocalService} from "../local.storage.service";
 import { group } from "@angular/animations";
+import {ListofnamesService} from "../listofnames/listofnames.service";
 
 @Injectable()
 export class PersoninfoService {
@@ -14,7 +15,7 @@ export class PersoninfoService {
   private filtered=false;
   private group:string='';
 
-
+constructor(private lofnamesService: ListofnamesService){}
 
   addPerson(person: Person) {
     this.people.push(person);
@@ -35,16 +36,56 @@ export class PersoninfoService {
       const people_2 = this.LocaleService.getData('people');
       this.people = JSON.parse(people_2);
     }
+    this.people=this.people.filter(e=>e!==null);
 
 
 
     this.peopleChanged.next(this.people.slice());
     return this.people.slice();
   }
+  initialize()
+  {
+    if ('people' in localStorage)
+    {
+      const people_2 = this.LocaleService.getData('people');
+      this.people = JSON.parse(people_2);
+    }
+    this.people=this.people.filter(e=>e!==null);
+
+  }
 
 
   getGroup(){
     return this.group;
+  }
+  deletePerson(id: number)
+  {
+
+    console.log("id: "+id);
+    console.log(this.getPeople());
+    // @ts-ignore
+   let index= this.people.indexOf(this.people.find(p=>p.id===id));
+
+   console.log("index: "+index);
+    if(this.people.length===1)
+    {
+      console.log("üres");
+      this.people = [];
+      this.LocaleService.removeData('people');
+
+    }
+    else {
+      delete this.people[index];
+      this.LocaleService.saveData('people', JSON.stringify(this.people.slice()));
+    }
+
+      this.people=this.people.filter(e=>e!==null);
+
+
+    this.initialize();
+   this.peopleChanged.next(this.people.slice());
+
+
   }
 
 

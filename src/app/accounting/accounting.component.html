@@ -16,7 +16,7 @@
 
 
     <form class="example-form">
-      <mat-form-field class="example-full-width" appearance="fill">
+      <mat-form-field [formGroup]="pform"  class="example-full-width" appearance="fill">
         <mat-label >Kezdj gépelni</mat-label>
         <input type="text"
                placeholder="Válassz egyet"
@@ -25,7 +25,7 @@
                [formControl]="myControl"
                [matAutocomplete]="auto">
 
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayProperty"   (optionSelected)="changePerson($event)" >
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayProperty"    (optionSelected)="changePerson($event)" >
           <mat-option *ngFor="let person of filteredPeople|async" [value]="person">
             {{person.name}} - {{person.birthDate |date: 'yyyy-MM-dd'}}
           </mat-option>

@@ -1,13 +1,13 @@
 <div class="row">
   <form (ngSubmit)="onSubmit(f)"  #f="ngForm">
   <div class="col-xs-12">
-    <ul class="lis-group">
+    <ul class="lis-group" >
         <div class="list-group-item" *ngFor="let person of filter(people)|orderBy:'name'; let i= index">
 
           <div  data-toggle="collapse" [attr.data-target]="'#' + 'prefix' +i" >
             <div class="grid-container person">
               <div class="grid-item name">
-          {{person.id}}  {{person.name}} ({{person.birthDate| date:"yyyy-MM-dd"}})
+           {{person.id}} {{person.name}} ({{person.birthDate| date:"yyyy-MM-dd"}})
               </div>
               <div class="grid-item checkbox">
 

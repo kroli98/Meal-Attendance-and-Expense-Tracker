@@ -24,6 +24,7 @@ export class AccountingService {
   }
   setSelectedPersonid(id:number){
     this.selectedPersonid = id;
+    this.priceSub.next(this.price)
   }
   getSelectedPersonb(){
     return this.selectedPersonb;
