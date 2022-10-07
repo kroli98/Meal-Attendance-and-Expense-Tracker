@@ -1,0 +1,41 @@
+<div id="print-section" *ngIf="mode=='Havi'" [hidden]="false"  >
+  <mat-form-field appearance="fill">
+    <mat-label>Month and Year</mat-label>
+    <input  matInput [matDatepicker]="dp" [formControl]="datef">
+    <mat-hint>MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp
+
+                    startView="multi-year"
+                    (monthSelected)="setMonthAndYear($event, dp)"
+                    panelClass="example-month-picker">
+
+    </mat-datepicker>
+  </mat-form-field>
+<table>
+
+  <tr>
+    <th ></th>
+    <th *ngFor="let day of days">{{day}}</th>
+  </tr>
+
+  <tr *ngFor="let person of people">
+  <th > {{person.name}}</th>
+    <th *ngFor="let p of this.peoplewithDates.values()">
+      <div *ngIf="p.includes(person.id)">
+        x
+      </div>
+
+
+    </th>
+  </tr>
+
+
+
+
+
+
+
+</table>
+</div>
+

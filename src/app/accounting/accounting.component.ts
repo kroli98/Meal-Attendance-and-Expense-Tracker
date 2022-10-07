@@ -4,7 +4,7 @@ import {PersoninfoService} from "../personinfo/personinfo.service";
 import {FormControl, FormGroup, NgForm} from "@angular/forms";
 import { Person } from '../shared/person.model';
 import { map, startWith } from 'rxjs/operators';
-import {Observable, Subscription} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {AccountingService} from "./accounting.service";
 
@@ -24,6 +24,7 @@ export class AccountingComponent implements OnInit {
   osszesites_options: string[]= [];
   option:string='';
   priceSub: Subscription |undefined;
+
   selected=false;
   price: number| undefined;
   // @ts-ignore
@@ -79,19 +80,22 @@ export class AccountingComponent implements OnInit {
 
 
   changeOsszesites(value: any) {
-   console.log(value);
+   this.accountingService.setMode(value);
 
 
   }
 
   changePerson($event: MatAutocompleteSelectedEvent) {
     this.selected=true;
+    // @ts-ignore
+    this.accountingService.setPersonName(this.piService.getPerson(Number($event.option.value.id)).name);
     this.accountingService.setSelectedPersonb(true);
 
     console.log("id"+$event.option.value.id);
     this.accountingService.setSelectedPersonid($event.option.value.id);
 
   }
+
   public displayProperty(value:any) {
     if (value) {
       return value.name;
@@ -99,4 +103,7 @@ export class AccountingComponent implements OnInit {
   }
 
 
+  savePrice() {
+    this.accountingService.setPrice(this.price)
+  }
 }

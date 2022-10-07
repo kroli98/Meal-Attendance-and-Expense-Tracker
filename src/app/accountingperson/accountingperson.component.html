@@ -1,4 +1,6 @@
 
+<div class="col-md-auto">
+
 
 
 <mat-form-field appearance="fill">
@@ -17,20 +19,44 @@
 <div *ngIf="finished">
   <mat-list>
     <mat-label>Jelenlét:</mat-label>
-  <mat-list-item *ngFor="let date of personDates">
-    {{date |date: 'yyyy-MM-dd'}}
+  <mat-list-item  *ngFor="let date of personDates">
+    <li>{{date |date: 'yyyy-MM-dd'}}</li>
   </mat-list-item>
-    <mat-list-item> <button mat-raised-button (click)="calculate()">
-      Díj számítás
-    </button></mat-list-item>
+<hr>
    <mat-list  role="list" *ngIf="mothlycalprice " >
+
      <mat-list-item role="listitem">Könyvelt napok száma: {{personDates.length}}</mat-list-item>
+     <hr>
      <mat-list-item role="listitem">Havi fizetendő: {{mothlycalprice}} Ft</mat-list-item>
    </mat-list>
-
+<hr>
 
 </mat-list>
+  <div id="print-section" [hidden]="true"  >
+  <div class="row">
+    <mat-label  style="margin:10px;font-size:20px"> {{this.start_date.getFullYear()}} {{this.start_date.getMonth()}}.havi elszámolás</mat-label>
+
+  </div>
+    <div class="row">
+      <mat-label  style="margin:10px;font-size:20px">Név: {{this.personName}}</mat-label>
+
+    </div>
+    <div class="row">
+      <mat-label  style="margin:10px;font-size:20px">Könyvelt napok:</mat-label>
+      </div>
+
+    <ul>
+    <li  style="margin:10px;font-size:20px" *ngFor="let date of personDates">
+      {{date |date: 'yyyy-MM-dd'}}
+    </li>
+      </ul>
+    <mat-label  style="margin:10px;font-size:20px">Fizetendő: {{mothlycalprice}} Ft</mat-label>
+  </div>
+  <button mat-raised-button
+  printTitle="Havi elszámolás"
+  printSectionId="print-section"
+  ngxPrint>Nyomtatás</button>
 
 
 </div>
-
+</div>

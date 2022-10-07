@@ -6,7 +6,7 @@ import { formatDate } from '@angular/common';
 import {Listinfo} from "../shared/listinfo.model";
 import {Subject, Subscription} from "rxjs";
 import { Person } from '../shared/person.model';
-import {FormGroup} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-accountingperson',
@@ -19,11 +19,15 @@ export class AccountingpersonComponent implements OnInit {
   start_date: Date =new Date();
   end_date:Date= new Date();
   personDates: Date[] = [];
+  personName="";
   finished=false;
   price: number |undefined;
   priceSub: Subscription |undefined;
   mothlycalprice: number |undefined;
   @ViewChild('f') form: any;
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()});
 
 
 
@@ -49,10 +53,12 @@ export class AccountingpersonComponent implements OnInit {
   {
     this.end_date= new Date($event.target.value);
     this.getDateListInfo();
+    this.calculate();
   }
   selectStartDate($event: any)
   {
     this.start_date=new Date($event.target.value);
+    this.personName=this.accountingService.getPersonName();
 
   }
   getDateListInfo()

@@ -87,6 +87,26 @@ constructor(private lofnamesService: ListofnamesService){}
 
 
   }
+  getPerson(id: number)
+  {
+    return this.people.filter(e=> e.id===id).slice().pop();
+  }
+  getidstonames(ids: Array<number>)
+  {
+    let names= new Array<string>();
+    for (let i=0; i<this.people.length; i++)
+    {
+      for (let j=0; j<ids.length; j++)
+      {
+        if(this.people[i].id===ids[j])
+        {
+          names.push(this.people[i].name);
+        }
+      }
+    }
+    return names;
+  }
+
 
 
 }

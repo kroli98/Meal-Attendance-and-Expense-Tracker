@@ -1,21 +1,22 @@
-<div class="row" style="justify-content: center">
+<div class="row body" style="justify-content: center">
 
-  <div class="col-xs-12">
-    <label style="margin:10px; font-size: 24px"  >Térítési díj: {{price}} Ft</label>
+  <div class="col-md-auto">
+    <div class="row" >
 
-    <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label for="osszesites" >Összesítés:</mat-label>
+      <label style="margin:30px;font-size: 24px; max-width: 35%"  >Térítési díj:</label>
+      <mat-form-field style="justify-content: left;width:20%;margin-top: 10px;"  class="example-full-width" appearance="fill">
+        <input type="text"
+               matInput
+               [(ngModel)]="price"
+                aria-label="number">
+      </mat-form-field>
+      <button style="width:15%;justify-content: left;height:20%;margin-top: 20px" mat-raised-button (click)="savePrice()" >Mentés</button>
+    </div>
 
-    <mat-select (selectionChange)="changeOsszesites($event.value)" [disableOptionCentering]="true" id="osszesites" name="osszesites" >
-      <mat-option *ngFor="let opt of osszesites_options" [value]="opt">
-        {{opt}}
-
-      </mat-option>
-    </mat-select>
-    </mat-form-field>
 
 
-    <form class="example-form">
+    <form class="nevek">
+      <mat-label style="font-size: 18px;">Keresendő név:</mat-label>
       <mat-form-field [formGroup]="pform"  class="example-full-width" appearance="fill">
         <mat-label >Kezdj gépelni</mat-label>
         <input type="text"
@@ -35,6 +36,26 @@
       <app-accountingperson *ngIf="selected"></app-accountingperson>
 
     </form>
+  </div>
+  <div class="col-md-auto">
+
+
+
+    <mat-form-field style="max-width:100%;width:auto" class="osszesites" appearance="fill">
+      <mat-label for="osszesites" >Összesítés:</mat-label>
+
+      <mat-select  (selectionChange)="changeOsszesites($event.value)" [disableOptionCentering]="true" id="osszesites" name="osszesites" >
+        <mat-option *ngFor="let opt of osszesites_options" [value]="opt">
+          {{opt}}
+
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <app-accountingsummary></app-accountingsummary>
+
+
+
+
   </div>
 
 
