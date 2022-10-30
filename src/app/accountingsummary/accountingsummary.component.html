@@ -1,10 +1,13 @@
-<div id="print-section" *ngIf="mode=='Havi'" [hidden]="false"  >
-  <mat-form-field appearance="fill">
+<div class="row" *ngIf="mode=='Havi'" >
+
+
+  <mat-form-field appearance="fill" >
     <mat-label>Month and Year</mat-label>
-    <input  matInput [matDatepicker]="dp" [formControl]="datef">
+    <input  matInput   [matDatepicker]="dp" [formControl]="datef">
     <mat-hint>MM/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
     <mat-datepicker #dp
+
 
                     startView="multi-year"
                     (monthSelected)="setMonthAndYear($event, dp)"
@@ -12,23 +15,113 @@
 
     </mat-datepicker>
   </mat-form-field>
-<table>
 
-  <tr>
-    <th ></th>
-    <th *ngFor="let day of days">{{day}}</th>
-  </tr>
+  <mat-form-field class="csoport" appearance="fill">
+    <mat-label for="csoport" >Csoport:</mat-label>
 
-  <tr *ngFor="let person of people">
-  <th > {{person.name}}</th>
-    <th *ngFor="let p of this.peoplewithDates.values()">
-      <div *ngIf="p.includes(person.id)">
-        x
-      </div>
+    <mat-select [(value)]="selectedCsop"  (selectionChange)="changeGroup($event.value)" [disableOptionCentering]="true" id="osszesites" name="osszesites" >
+      <mat-option *ngFor="let opt of group_options" [value]="opt">
+        {{opt}}
+
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+<div  id="print-section" >
+
+  <div class="row" style="padding:10px">
+    <div class="col-sm-2 ">Csoport: {{selectedCsop}}</div>
+    <div class="col-md-8 text-center">
+      {{date.getFullYear()+" év " +(date.getMonth()+1)+" hó" +" 1 -től"}} {{(date.getMonth()+1)+" hó " +dates+" -ig"}}
+    </div>
+
+
+  </div>
+
+  <table >
+
+    <tr>
+      <th [rowSpan]="2">Sorszám</th>
+      <th  [rowSpan]="2">
+        Név
+      </th>
+      <th [colSpan]="days.length">
+        Naptári napok száma
+      </th>
+      <th  [rowSpan]="2"> Tényleges étkezési napok száma</th>
+      <th [rowSpan]="2"> Előre befizetett napok száma</th>
+      <th  [rowSpan]="2"> Napi térítési díj</th>
+      <th  [rowSpan]="2">Tárgyhavi előleg összege</th>
+      <th  >Túlfizetés (-)</th>
+      <th >Hátralék (+)</th>
+      <th  [rowSpan]="1">Tárgyhavi tényleges befizetés</th>
+      <th  [rowSpan]="1">Túlfizetés (-)</th>
+      <th  [rowSpan]="1">Hátralék (+)</th>
+      <th  [rowSpan]="1">Megjegyzés (aláírás)</th>
+
+
+    </tr>
+
+    <tr >
+
+
+
+      <th *ngFor="let day of days">{{day}}</th>
+
+      <th [colSpan]="2">az előző hóról</th>
+      <th></th>
+      <th [colSpan]="2">tárgyhavi összege</th>
+
+
+
+    </tr>
+
+    <tr *ngFor="let person of people,let i=index">
+
+      <th >{{i+1}}</th>
+
+      <th > {{person.name}}</th>
+      <th *ngFor="let p of this.peoplewithAllDates.values()">
+        <div *ngIf="p.includes(person.id) " >
+          x
+
+        </div>
+
+
+
+      </th>
+      <th>{{this.peopleCountMonth.get(person.id)}}</th>
+      <th></th>
+      <th>{{this.accountingService.getPersonPrice(person.id)}}</th>
+      <th> {{this.accountingService.getPersonMonthPrice(person.id,this.peopleCountMonth.get(person.id))}}</th>
+      <th></th>
+      <th></th>
+      <th> {{this.accountingService.getPersonMonthPrice(person.id,this.peopleCountMonth.get(person.id))}}</th>
+      <th></th>
+      <th></th>
+      <th></th>
+
+
+
+    </tr>
+
+    <th></th>
+    <th>Összesen</th>
+    <th *ngFor="let p of this.peoplewithAllDates.values()">
+      {{p.length}}
 
 
     </th>
-  </tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
 
 
 
@@ -36,6 +129,36 @@
 
 
 
-</table>
+
+
+  </table>
+
+  <div class="row" style="justify-content: center">
+    <div class="col-sm text-center" style="padding: 20px">
+
+      <hr >
+      <p>kiállította</p>
+
+    </div>
+    <div class="col-sm text-center" style="padding: 20px">
+
+      <hr >
+      <p>számfejtette</p>
+
+    </div>
+    <div class="col-sm text-center" style="padding: 20px">
+
+      <hr >
+      <p >ellenőrizte</p>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+
+
 </div>
 

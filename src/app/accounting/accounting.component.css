@@ -5,7 +5,7 @@
 }
 
 .osszesites {
-  width: 21.5%;
+  width: 40%;
 }
 .nevek{
   width: 40%;
@@ -13,6 +13,5 @@
 .row.body{
   background-color:lightskyblue;
   border-radius: 25px;
-  margin-left: 5%;
-  margin-right: 5%;
+
 }

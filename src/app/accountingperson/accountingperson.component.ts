@@ -6,12 +6,24 @@ import { formatDate } from '@angular/common';
 import {Listinfo} from "../shared/listinfo.model";
 import {Subject, Subscription} from "rxjs";
 import { Person } from '../shared/person.model';
-import {FormControl, FormGroup} from "@angular/forms";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, NativeDateAdapter} from "@angular/material/core";
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from "@angular/material-moment-adapter";
+
+
 
 @Component({
   selector: 'app-accountingperson',
   templateUrl: './accountingperson.component.html',
-  styleUrls: ['./accountingperson.component.css']
+  styleUrls: ['./accountingperson.component.css'],
+  providers:[
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+
+
+  ],
 })
 export class AccountingpersonComponent implements OnInit {
   personid: number | undefined;
@@ -25,10 +37,6 @@ export class AccountingpersonComponent implements OnInit {
   priceSub: Subscription |undefined;
   mothlycalprice: number |undefined;
   @ViewChild('f') form: any;
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()});
-
 
 
   constructor(public piService: PersoninfoService, private lofnamesService: ListofnamesService, private accountingService: AccountingService) {

@@ -1,5 +1,6 @@
 table, th, td {
   border: 1px solid black;
+  text-align: center;
 }
 .example-month-picker .mat-calendar-period-button {
   pointer-events: none;
@@ -7,4 +8,10 @@ table, th, td {
 
 .example-month-picker .mat-calendar-arrow {
   display: none;
+}
+hr{
+ border-top: 1px solid black;
+}
+mat-form-field {
+  width: 20%;
 }

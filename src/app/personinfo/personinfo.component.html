@@ -14,16 +14,91 @@
           <input  type="checkbox" style="width: 30px;height: 30px" id='checkbox{{person.id}}' (click)="refreshCheckedList()"  name="checkbox{{person.id}}"
                  [checked]="true">
               </div>
-              <div class="grid-item deleteb">
-                <button mat-fab color="primary" (click)="deletePerson(person.id)" aria-label="Example icon button with a delete icon">
+              <div class="grid-item deleteb" >
+                <button  mat-fab color="primary" (click)="deletePerson(person.id)" aria-label="Example icon button with a delete icon">
                   <mat-icon>delete</mat-icon>
+                </button>
+                <button  mat-fab color="primary" (click)="onEditClick(person,f)">
+                  <mat-icon>edit</mat-icon>
                 </button>
                 </div>
             </div>
           </div>
           <div class="collapse" [attr.id]=" 'prefix' + i">
             <hr>
-            <div class="grid-container">
+            <form (ngSubmit)="onSubmit(f)" #f="ngForm" [hidden]="!modify" >
+              <div class="grid-container">
+                <div class="grid-item name">
+
+                  <label for="name" class="control-label" >Név: </label>
+                  <input type="text" class="form-control" id="name" name="name" ngModel required>
+
+                  <label for="birthDate" class="control-label" id="birthDate">Születési idő: </label>
+                  <input  class="form-control" type="date" id="birthdateinput" name="birthdateinput" ngModel required>
+
+                  <label for="discount" class="control-label">Kedvezmény: </label>
+                  <select class="form-select" id="discount" name="discount" aria-label="Default select example">
+                    <option selected>Kiválasztás</option>
+                    <option value="10%">10% </option>
+                    <option value="50%">50% </option>
+                    <option value="100%">100% </option>
+
+                  </select>
+
+                </div>
+
+
+                <div class="grid-item discount">
+
+                  <label for="documenttype" class="control-label" >Dokumentum típusa: </label>
+                  <select class="form-select" id="documenttype" name="documenttype" aria-label="Default select example">
+                    <option selected>Kiválasztás</option>
+                    <option value="Gyermekvédelmi támogatás">Gyermekvédelmi támogatás </option>
+                    <option value="Ingyenes étkezési nyilatkozat">Ingyenes étkezési nyilatkozat</option>
+                    <option value="Tartós beteg">Tartós beteg</option>
+                    <option value="3+ gyermekes">3+ gyermekes</option>
+                    <option value="Nevelésbe vett">Nevelésbe vett</option>
+
+                  </select>
+
+                  <label for="startdate" class="control-label" >Kezdet: </label>
+                  <input type="date" id="startdate" name="startdate" class="form-control">
+
+                  <label for="enddate" class="control-label" >Lejárat: </label>
+                  <input type="date" id="enddate" name="enddate" class="form-control">
+
+
+                </div>
+
+
+              </div>
+              <label for="group" style="" class="control-label" >Csoport: </label>
+              <select (change)="onClassSelected()" class="form-select" id="group" name="group" aria-label="Default select example">
+                <option selected>Kiválasztás</option>
+                <option value="Iskola">Iskola </option>
+                <option value="Óvoda">Óvoda</option>
+                <option value="Idősek otthona">Idősek otthona</option>
+                <option value="Vendég">Vendég</option>
+
+
+              </select>
+
+              <div *ngIf="schoolselected" >
+                <label for="school_group" style="" class="control-label" >Iskolai csoport: </label>
+                <select  class="form-select" id="school_group" name="school_group" aria-label="Default select example">
+                  <option selected>Kiválasztás</option>
+                  <option value="Napközi">Napközi </option>
+                  <option value="Menza">Menza</option>
+
+                </select>
+              </div>
+
+
+              <button  type="submit" style="margin:20px" class="btn btn-success" >Mentés</button>
+
+
+            </form>
+            <div class="grid-container" *ngIf="!modify">
               <div class="grid-item">
                 Kedvezmény: {{person.discount}}
               </div>
@@ -35,6 +110,10 @@
               </div>
               <div class="grid-item">
                 Csoport: {{person.group}}
+
+              </div>
+              <div class="grid-item">
+                Ingyenes?: {{person.isFree}}
 
               </div>
 

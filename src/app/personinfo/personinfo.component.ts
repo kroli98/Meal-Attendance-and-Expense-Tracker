@@ -1,11 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild, ViewChildren} from '@angular/core';
 import {Person} from "../shared/person.model";
 import {delay, Subscription} from "rxjs";
 import {PersoninfoService} from "./personinfo.service";
-import {NgForm} from "@angular/forms";
+import {FormGroup, NgForm} from "@angular/forms";
 import {ListofnamesService} from "../listofnames/listofnames.service";
 import {Listinfo} from "../shared/listinfo.model";
 import {LocalService} from "../local.storage.service";
+import {forms} from "@angular/core/schematics/migrations/typed-forms/util";
 
 
 
@@ -15,19 +16,24 @@ import {LocalService} from "../local.storage.service";
   styleUrls: ['./personinfo.component.css']
 })
 export class PersoninfoComponent implements OnInit {
-  @ViewChild('f') form: NgForm | undefined;
+
   people: Person[] |undefined;
   date: Date = new Date();
   checkedpeople: Array<number> = [];
   uncheckedpeople: Array<number> = [];
 
 
+
   private pChangeSub: Subscription | undefined;
   private dateChangeSub: Subscription | undefined;
   private filteredChangeSub: Subscription | undefined;
 
+  schoolselected: any;
+  modify: Boolean= false;
+
+
   constructor(private piService: PersoninfoService, private lofnamesService: ListofnamesService,
-              private localStorage: LocalService) {
+              private localStorage: LocalService,private changeDetector: ChangeDetectorRef) {
   }
 
 
@@ -270,6 +276,26 @@ export class PersoninfoComponent implements OnInit {
 
 
   }
+
+  onEditClick(person:Person,f:NgForm) {
+
+    this.modify=true;
+  this.changeDetector.detectChanges();
+    console.log(f);
+    // @ts-ignore
+    f.form.value['name']=person.name;
+
+
+
+
+
+
+  }
+
+  onClassSelected() {
+
+  }
+
 }
 
 

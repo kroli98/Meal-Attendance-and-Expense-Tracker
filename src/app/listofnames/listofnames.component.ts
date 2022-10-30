@@ -146,9 +146,18 @@ export class ListofnamesComponent implements OnInit {
       console.log("id:"+this.id)
     }
 
+    if(discount=="100%")
+    {
+      // @ts-ignore
+      newPerson = new Person(this.id,new Date(this.date), value.name, value.birthdateinput, discount, documenttype, startdate, enddate,group,school_group,true);
 
-    // @ts-ignore
-    newPerson = new Person(this.id,new Date(this.date), value.name, value.birthdateinput, discount, documenttype, startdate, enddate,group,school_group);
+    }
+    else{
+      // @ts-ignore
+      newPerson = new Person(this.id,new Date(this.date), value.name, value.birthdateinput, discount, documenttype, startdate, enddate,group,school_group,false);
+
+    }
+
     console.log("nev"+newPerson);
 
 

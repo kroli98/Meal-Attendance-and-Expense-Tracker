@@ -17,7 +17,7 @@ import {AccountingService} from "./accounting.service";
 export class AccountingComponent implements OnInit {
 
 
-  dayprice: number= 5400;
+  dayprice: number= 500;
 
   myControl = new FormControl('');
   filteredPeople: Observable<Person[]> | undefined;

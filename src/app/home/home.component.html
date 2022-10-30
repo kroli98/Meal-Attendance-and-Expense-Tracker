@@ -7,11 +7,19 @@
       <mat-panel-title >
         Hamarosan lejáró igazolások:
       </mat-panel-title>
-      <mat-panel-description>
-        Currently I am {{panelOpenState ? 'open' : 'closed'}}
+      <mat-panel-description style="justify-content: center">
+        {{soonexpirepeople.length}} személy
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
+      <div *ngFor="let p of soonexpirepeople" class="row">
+        <hr>
+        <p >Név: {{p.name}}</p>
+        <p >Dokument típusa: {{p.doctype}}</p>
+        <p >Lejárat: {{p.docendDate}}</p>
+        <hr>
+      </div>
+
+
     </mat-expansion-panel>
 
   </div>

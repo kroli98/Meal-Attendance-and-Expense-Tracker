@@ -12,9 +12,10 @@
       </mat-form-field>
       <button style="width:15%;justify-content: left;height:20%;margin-top: 20px" mat-raised-button (click)="savePrice()" >Mentés</button>
     </div>
+</div>
+<div class="row" style="justify-content: center">
 
-
-
+  <div class="col-md-auto">
     <form class="nevek">
       <mat-label style="font-size: 18px;">Keresendő név:</mat-label>
       <mat-form-field [formGroup]="pform"  class="example-full-width" appearance="fill">
@@ -38,11 +39,10 @@
     </form>
   </div>
   <div class="col-md-auto">
-
-
-
+    <form class="osszesites" >
+    <mat-label style="font-size: 18px;">Összesítés:</mat-label>
     <mat-form-field style="max-width:100%;width:auto" class="osszesites" appearance="fill">
-      <mat-label for="osszesites" >Összesítés:</mat-label>
+
 
       <mat-select  (selectionChange)="changeOsszesites($event.value)" [disableOptionCentering]="true" id="osszesites" name="osszesites" >
         <mat-option *ngFor="let opt of osszesites_options" [value]="opt">
@@ -51,6 +51,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    </form>
     <app-accountingsummary></app-accountingsummary>
 
 
@@ -59,4 +60,9 @@
   </div>
 
 
+
+
 </div>
+
+</div>
+

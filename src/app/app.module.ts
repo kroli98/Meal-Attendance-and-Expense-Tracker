@@ -25,15 +25,16 @@ import {MatSelectModule} from "@angular/material/select";
 import { AccountingpersonComponent } from './accountingperson/accountingperson.component';
 import {AccountingService} from "./accounting/accounting.service";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {DateAdapter, MatNativeDateModule} from "@angular/material/core";
+import {DateAdapter, MatNativeDateModule, NativeDateAdapter} from "@angular/material/core";
 import {MatListModule} from "@angular/material/list";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatButtonModule} from "@angular/material/button";
 import {NgxPrintModule} from "ngx-print";
 import {MatIconModule} from "@angular/material/icon";
 import { AccountingsummaryComponent } from './accountingsummary/accountingsummary.component';
-import {MomentDateAdapter, MomentDateModule} from "@angular/material-moment-adapter";
+import {MatMomentDateModule, MomentDateAdapter, MomentDateModule} from "@angular/material-moment-adapter";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {HttpClientModule} from "@angular/common/http";
 
 
 
@@ -69,14 +70,21 @@ import {MatExpansionModule} from "@angular/material/expansion";
     BrowserAnimationsModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule,
     MatListModule,
     MatButtonToggleModule,
     MatButtonModule,
     NgxPrintModule,
     MatIconModule,
     MomentDateModule,
-    MatExpansionModule
+    MatExpansionModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    MatMomentDateModule,
+
 
 
   ],

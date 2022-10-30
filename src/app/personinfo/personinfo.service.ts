@@ -89,7 +89,7 @@ constructor(private lofnamesService: ListofnamesService){}
   }
   getPerson(id: number)
   {
-    return this.people.filter(e=> e.id===id).slice().pop();
+    return this.people.filter(e=> e.id===id).slice()[0];
   }
   getidstonames(ids: Array<number>)
   {
