@@ -18,8 +18,8 @@
     </svg>
     Előző nap
   </button>
-<div class="text-center" style="margin: auto 10px ;">
-  <input type="date"  [(ngModel)]="datestring" (ngModelChange)="onDateChange($event)"   id="currentdate" name="currentdate" class="form-control" >
+<div class="text-center" style="margin: auto 10px ">
+  <input type="date" [ngStyle]="{'background-color':date_exist ? 'green' : 'red'}" [(ngModel)]="datestring" (ngModelChange)="onDateChange($event)" id="currentdate" name="currentdate" class="form-control" >
      </div>
 
     <button type="button" (click)="nextDay()" class="btn btn-outline-danger" style="margin: 20px">

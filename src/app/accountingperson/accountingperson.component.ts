@@ -86,6 +86,7 @@ console.log(dateListInfo);
         this.personDates.push(this.listinfo_per_person[i].date);
       }
       this.finished=true;
+      this.personDates= this.personDates.sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
 
 
   }

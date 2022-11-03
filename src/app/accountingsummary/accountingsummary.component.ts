@@ -16,6 +16,7 @@ import {FormControl} from "@angular/forms";
 import * as _moment from 'moment'
 import {default as _rollupMoment, Moment} from 'moment';
 import {DatePicker} from "@syncfusion/ej2-angular-calendars";
+import {NgxPrintElementComponent, NgxPrintElementService} from "ngx-print-element";
 const moment = _rollupMoment || _moment;
 
 export const MY_FORMATS = {
@@ -67,8 +68,12 @@ export class AccountingsummaryComponent implements OnInit {
   selectedCsop="";
   changed=false;
   loaded: Boolean = false;
+  config: any;
 
-  constructor(public accountingService: AccountingService,private piService:PersoninfoService, private liService:ListofnamesService) { }
+  constructor(public accountingService: AccountingService,private piService:PersoninfoService, private liService:ListofnamesService,public print:NgxPrintElementService) { }
+
+
+
 
   ngOnInit(): void {
 
@@ -91,7 +96,20 @@ this.selectedCsop="Iskola";
     this.days = Array.from(Array(this.dates + 1).keys())
     this.days = this.days.slice(1, this.days.length);
     this.loadtable();
+     this.config = {
+      printMode: 'template-popup',
+      popupProperties:
+        'toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,fullscreen=yes',
+      pageTitle: "havi_elszamolas_" + this.selectedCsop + "_" + this.date.getFullYear() + "_" + this.date.getMonth(),
+      // templateString: '<header>I\'m part of the template header</header>{{printBody}}<footer>I\'m part of the template footer</footer>',
+      // stylesheets: [{ rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' }],
+      styles: [
+        '.table {  text-align: center; font-size: 12px;}',
+        '.table td { text-align: center;}',
+        '.table th { text-align: center}',
 
+      ],
+    };
 
 
   }
@@ -200,6 +218,8 @@ this.selectedCsop="Iskola";
         }
       }
     }
+
+
     this.loaded=true;
   }
   getDaysInMonth(year:number, month:number) {

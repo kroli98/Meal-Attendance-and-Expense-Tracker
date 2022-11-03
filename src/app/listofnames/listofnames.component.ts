@@ -3,7 +3,7 @@ import {Person} from "../shared/person.model";
 import {max, Subscription} from "rxjs";
 import {PersoninfoService} from "../personinfo/personinfo.service";
 import {NgForm} from "@angular/forms";
-import {DatePipe} from "@angular/common";
+import {DatePipe, formatDate} from "@angular/common";
 import {ListofnamesService} from "./listofnames.service";
 
 
@@ -30,6 +30,7 @@ export class ListofnamesComponent implements OnInit {
   filtered:boolean= false;
   groupsel: any |undefined;
   newColor: boolean = false;
+  date_exist: Boolean |undefined;
 
   constructor(private piService: PersoninfoService, private datePipe: DatePipe, private lofnamesService: ListofnamesService) {
   }
@@ -46,7 +47,7 @@ export class ListofnamesComponent implements OnInit {
     this.datestring = this.datePipe.transform(this.date, 'yyyy-MM-dd');
     this.lofnamesService.setDate(this.date);
 
-    console.log(this.date.toUTCString());
+
 
     this.pChangeSub = this.piService.peopleChanged.subscribe((people: Person[]) => {
       this.people = people
@@ -57,7 +58,17 @@ export class ListofnamesComponent implements OnInit {
 
 
     });
+    setTimeout(() => {
+      if(this.lofnamesService.listinfo.find(e=>this.formatDate(e.date) === this.formatDate(this.date)))
+      {
+        this.date_exist=true;
+      }
+      else{
+        this.date_exist=false;
+      }
+    },100);
 
+console.log("Exist"+this.date_exist);
 
   }
   onClassSelected(){
@@ -103,6 +114,7 @@ export class ListofnamesComponent implements OnInit {
   formShow() {
     this.clicked = !this.clicked;
     console.log(this.people.length);
+
   }
 
 
@@ -179,7 +191,13 @@ export class ListofnamesComponent implements OnInit {
     this.date.setDate(this.date.getDate() + 1);
     this.datestring = this.datePipe.transform(this.date, 'yyyy-MM-dd');
     this.lofnamesService.setDate(this.date);
-
+    if(this.lofnamesService.listinfo.find(e=>this.formatDate(e.date) === this.formatDate(this.date)))
+    {
+      this.date_exist=true;
+    }
+    else{
+      this.date_exist=false;
+    }
 
 
   }
@@ -190,7 +208,13 @@ export class ListofnamesComponent implements OnInit {
     this.date.setDate(this.date.getDate() - 1);
     this.datestring = this.datePipe.transform(this.date, 'yyyy-MM-dd');
     this.lofnamesService.setDate(this.date);
-
+    if(this.lofnamesService.listinfo.find(e=>this.formatDate(e.date) === this.formatDate(this.date)))
+    {
+      this.date_exist=true;
+    }
+    else{
+      this.date_exist=false;
+    }
 
 
   }
@@ -199,6 +223,13 @@ export class ListofnamesComponent implements OnInit {
   onDateChange($event: Event) {
     this.date = new Date(this.datestring);
     this.lofnamesService.setDate(this.date);
+    if(this.lofnamesService.listinfo.find(e=>this.formatDate(e.date) === this.formatDate(this.date)))
+    {
+      this.date_exist=true;
+    }
+    else{
+      this.date_exist=false;
+    }
 
 
   }
@@ -250,6 +281,18 @@ export class ListofnamesComponent implements OnInit {
 
 
 
+  }
+  padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
+  }
+
+  formatDate(date: Date) {
+    date = new Date(date);
+    return [
+      date.getFullYear(),
+      this.padTo2Digits(date.getMonth() + 1),
+      this.padTo2Digits(date.getDate()),
+    ].join('-');
   }
 
 }

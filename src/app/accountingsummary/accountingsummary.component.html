@@ -17,7 +17,7 @@
   </mat-form-field>
 
   <mat-form-field class="csoport" appearance="fill">
-    <mat-label for="csoport" >Csoport:</mat-label>
+    <mat-label style="font-size: 14px" for="csoport" >Csoport:</mat-label>
 
     <mat-select [(value)]="selectedCsop"  (selectionChange)="changeGroup($event.value)" [disableOptionCentering]="true" id="osszesites" name="osszesites" >
       <mat-option *ngFor="let opt of group_options" [value]="opt">
@@ -27,7 +27,7 @@
     </mat-select>
   </mat-form-field>
 
-<div  id="print-section" >
+<div id="print-section" >
 
   <div class="row" style="padding:10px">
     <div class="col-sm-2 ">Csoport: {{selectedCsop}}</div>
@@ -38,7 +38,7 @@
 
   </div>
 
-  <table >
+  <table class="table table-bordered" >
 
     <tr>
       <th [rowSpan]="2">Sorszám</th>
@@ -66,7 +66,7 @@
 
 
 
-      <th *ngFor="let day of days">{{day}}</th>
+      <th [ngStyle]="{'background-color':peoplewithDates.has(day) ? '' : 'grey' }"  *ngFor="let day of days">{{day}}</th>
 
       <th [colSpan]="2">az előző hóról</th>
       <th></th>
@@ -156,6 +156,16 @@
 
 
 </div>
+
+  <div class="row" style="justify-content: center; padding: 10px">
+    <button style="border-radius: 15px; width: fit-content;" [print]="['print-section', config]" class="btn btn-info">
+      Nyomtatás
+    </button>
+
+  </div>
+
+
+
 
 
 

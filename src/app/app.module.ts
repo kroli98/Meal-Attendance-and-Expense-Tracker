@@ -35,6 +35,9 @@ import { AccountingsummaryComponent } from './accountingsummary/accountingsummar
 import {MatMomentDateModule, MomentDateAdapter, MomentDateModule} from "@angular/material-moment-adapter";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {HttpClientModule} from "@angular/common/http";
+import {NgxPrintElementModule} from "ngx-print-element";
+import { PersoninfoeditComponent } from './personinfoedit/personinfoedit.component';
+import {MatCardModule} from "@angular/material/card";
 
 
 
@@ -52,6 +55,7 @@ import {HttpClientModule} from "@angular/common/http";
     AccountingComponent,
     AccountingpersonComponent,
     AccountingsummaryComponent,
+    PersoninfoeditComponent,
 
   ],
   imports: [
@@ -84,7 +88,8 @@ import {HttpClientModule} from "@angular/common/http";
     MatNativeDateModule,
     ReactiveFormsModule,
     MatMomentDateModule,
-
+    NgxPrintElementModule,
+    MatCardModule,
 
 
   ],

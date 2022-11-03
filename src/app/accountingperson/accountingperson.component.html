@@ -1,5 +1,5 @@
 
-<div class="col-md-auto">
+<div class="col-md-auto" style="width: fit-content">
 
 
 
@@ -21,8 +21,11 @@
 <div *ngIf="finished">
   <mat-list>
     <mat-label>Jelenlét:</mat-label>
-  <mat-list-item  *ngFor="let date of personDates">
-    <li>{{date |date: 'yyyy-MM-dd'}}</li>
+  <mat-list-item  *ngFor="let date of personDates.reverse()">
+
+      <li>{{date |date: 'yyyy-MM-dd'}}</li>
+
+
   </mat-list-item>
 <hr>
    <mat-list  role="list" *ngIf="mothlycalprice " >

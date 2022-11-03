@@ -18,7 +18,14 @@ export class PersoninfoService {
 constructor(private lofnamesService: ListofnamesService){}
 
   addPerson(person: Person) {
+  if(this.people.find(p => p.id == person.id)){
+    this.people[this.people.findIndex(p => p.id == person.id)]=person;
+
+  }
+  else{
     this.people.push(person);
+  }
+
     this.LocaleService.saveData('people', JSON.stringify(this.people));
     this.peopleChanged.next(this.people.slice());
   }

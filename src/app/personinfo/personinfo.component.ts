@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, OnInit, ViewChild, ViewChildren} from '@an
 import {Person} from "../shared/person.model";
 import {delay, Subscription} from "rxjs";
 import {PersoninfoService} from "./personinfo.service";
-import {FormGroup, NgForm} from "@angular/forms";
+import {FormGroup, FormGroupDirective, NgForm} from "@angular/forms";
 import {ListofnamesService} from "../listofnames/listofnames.service";
 import {Listinfo} from "../shared/listinfo.model";
 import {LocalService} from "../local.storage.service";
@@ -28,8 +28,10 @@ export class PersoninfoComponent implements OnInit {
   private dateChangeSub: Subscription | undefined;
   private filteredChangeSub: Subscription | undefined;
 
+
   schoolselected: any;
   modify: Boolean= false;
+  public mform: any;
 
 
   constructor(private piService: PersoninfoService, private lofnamesService: ListofnamesService,
@@ -41,6 +43,7 @@ export class PersoninfoComponent implements OnInit {
 
 
     this.lofnamesService.initialize();
+
     this.filteredChangeSub = this.dateChangeSub;
     this.loadCheckedPeople();
     // @ts-ignore
@@ -163,6 +166,7 @@ export class PersoninfoComponent implements OnInit {
     this.refreshCheckedList();
     this.lofnamesService.addDay(this.checkedpeople.slice());
 
+
   }
 
 
@@ -279,16 +283,7 @@ export class PersoninfoComponent implements OnInit {
 
   onEditClick(person:Person,f:NgForm) {
 
-    this.modify=true;
-  this.changeDetector.detectChanges();
-    console.log(f);
-    // @ts-ignore
-    f.form.value['name']=person.name;
-
-
-
-
-
+    this.modify=!this.modify;
 
   }
 
@@ -296,6 +291,18 @@ export class PersoninfoComponent implements OnInit {
 
   }
 
+  onSubmitModify(m: NgForm) {
+
+  }
+
+  loadDefaultData(m: NgForm) {
+    console.log(m)
+  }
+
+  toggleModify(b: boolean) {
+    this.modify=b;
+
+  }
 }
 
 
