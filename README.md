@@ -2,7 +2,7 @@
 
 Leírás:
 
-Ez egy Angular alkalmazás, amely elektron app formájában offline telepíthető, és segít nyomon követni az étkezést, jelenlétet és a költségeket.
+Ez egy Angular alkalmazás, amely elektron app formájában offline telepíthető, és segít nyomon követni az étkezést, jelenlétet és a költségeket közétkeztetésben.
 
 
 Funkciók:
