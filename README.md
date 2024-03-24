@@ -1,5 +1,45 @@
-# Meal attendance management system
+Étkezés jelenlét és nyilvántartás könyvelő
 
+Leírás:
+
+Ez egy Angular alkalmazás, amely elektron app formájában offline telepíthető, és segít nyomon követni az étkezést, jelenlétet és a költségeket.
+
+
+Funkciók:
+
+Jelenlét nyilvántartás (névsor fül):
+  Étkező hozzáadása
+  Étkezők szűrése névre, csoportra
+  Ki és bevétel a napi étkezők közül
+  Dátum változtatása
+  
+  
+Költségkövetés (könyvelés fül):
+  Térítési dijak megadása
+  Étkezések kimutatása névre és dátum intervallumra keresve
+  Havi összesítés táblázatos formában csoportokra bontva
+  
+-------------------------------------------------------------------------
+Meal Attendance and Expense Tracker
+
+Description:
+
+This is an Angular application that can be installed offline as an Electron app. It helps track meals, attendance, and expenses in public meal service.
+
+Features:
+
+Attendance Tracking (Névsor tab):
+  Add attendees
+  Filter attendees by name, group
+  Check in and out attendees for the day
+  Change date
+  
+Expense Tracking (Könyvelés tab):
+  Enter reimbursement fees
+  View meal reports by name and date range
+  Monthly summary table with breakdown by groups
+
+## Other info
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.6.
 
 ## Development server
