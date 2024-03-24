@@ -18,6 +18,12 @@ Költségkövetés (könyvelés fül):
   Térítési dijak megadása
   Étkezések kimutatása névre és dátum intervallumra keresve
   Havi összesítés táblázatos formában csoportokra bontva
+
+Lehetséges fejlesztések:
+
+Többféle kimutatás
+Biztonságosabb bejelentkezési folyamat
+Felhasználói felület (UI) újragondolása:
   
 -------------------------------------------------------------------------
 Meal Attendance and Expense Tracker
@@ -38,6 +44,12 @@ Expense Tracking (Könyvelés tab):
   Enter reimbursement fees
   View meal reports by name and date range
   Monthly summary table with breakdown by groups
+
+Possible improvements:
+  More type of summaries 
+  Better and safer handling of login password
+  User Interface (UI) redesign
+  
 
 ## Other info
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.6.
