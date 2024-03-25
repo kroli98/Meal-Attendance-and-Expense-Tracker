@@ -12,8 +12,7 @@ Jelenlét nyilvántartás (névsor fül):
   Étkezők szűrése névre, csoportra
   Ki és bevétel a napi étkezők közül
   Dátum változtatása
-  
-  
+
 Költségkövetés (könyvelés fül):
   Térítési dijak megadása
   Étkezések kimutatása névre és dátum intervallumra keresve
@@ -23,7 +22,9 @@ Lehetséges fejlesztések:
 
 Többféle kimutatás
 Biztonságosabb bejelentkezési folyamat
-Felhasználói felület (UI) újragondolása:
+Felhasználói felület (UI) újragondolása
+
+Belépési jelszó: Konyha7943
   
 -------------------------------------------------------------------------
 Meal Attendance and Expense Tracker
@@ -49,6 +50,8 @@ Possible improvements:
   More type of summaries 
   Better and safer handling of login password
   User Interface (UI) redesign
+
+Login password: Konyha7943
   
 
 ## Other info
